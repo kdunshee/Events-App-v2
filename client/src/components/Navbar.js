@@ -50,7 +50,12 @@ class Navbar extends React.Component {
               active={this.props.location.pathname === '/'}
             />
           </Link>
-            { this.rightNavItems() }
+          <Link to='/create'>
+            <Menu.Item
+              name='create'
+              id='create'
+            />
+          </Link>
         </Menu>
       </div>
     )
