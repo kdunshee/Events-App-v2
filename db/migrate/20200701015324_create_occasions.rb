@@ -1,0 +1,12 @@
+class CreateOccasions < ActiveRecord::Migration[6.0]
+  def change
+    create_table :occasions do |t|
+      t.string :name
+      t.string :description
+      t.string :time
+      t.string :additional_info
+
+      t.timestamps
+    end
+  end
+end
