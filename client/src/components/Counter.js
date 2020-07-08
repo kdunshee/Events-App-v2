@@ -12,13 +12,23 @@ const Counter = () => {
 
   
   return (
-    <div>
+    <div style={styles.button}>
         
         <h5> {count}</h5>
-        <Button onClick={handleIncrement}>Likes</Button>
+        <Button color = 'white'onClick={handleIncrement}>Likes</Button>
       </div>
       
   );
 }
+const styles = {
+  button: {
+  display: 'flex',
+  padding: '0',
+  margin: '0',
+  justifyContent: "space-around",
+    
+  },
+};
+
 
 export default Counter;

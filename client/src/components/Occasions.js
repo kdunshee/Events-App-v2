@@ -5,6 +5,8 @@ import { Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import OccasionForm from './OccasionForm'
 import Counter from "./Counter";
+import styled from 'styled-components'
+
 
 const Occasions = (props) => {
   const [occasions, setOccasions] = useState([]);
@@ -36,34 +38,30 @@ const Occasions = (props) => {
     if (occasions.length <= 0) return <h2>No occasion</h2>;
     return occasions.map((occasion) => (
       <div>
-        <Card color = "blue card" key={`occasion-${occasion.id}`}>
-          <Card.Content>
-            <Card.Header>{occasion.name}</Card.Header>
-            <Card.Description>{occasion.description}</Card.Description>
-            <Card.Description>Time: {occasion.time}</Card.Description>
-          </Card.Content>
-          <Card.Content extra>
-            <Counter />
-            <Button color= "ui inverted primary button"as={Link} to={`/occasions/${occasion.id}`}>
-              <Link
-
-              Link to={`/OccasionView/`}
-          key={props.id}
-          {...props}>
-        <button>View</button>
-        </Link>
-
+        <div key={`occasion-${occasion.id}`} style={styles.container}>
+          
+          <HeaderText style={styles.statHeader}>{occasion.name}</HeaderText>
+            <BodyText style={styles.statValue}>{occasion.description}</BodyText>
+            <br/>
+            <BodyText style={styles.statValue}>Time: {occasion.time}</BodyText>
+            <br/>
+         
+          <div style={styles.button}>
+            <Button color = 'blue'as={Link} to={`/occasions/${occasion.id}`}>
+              View
             </Button>
-            <Button color="ui inverted red button" onClick={() => deleteOccasion(occasion.id)} >
+            <Button color = 'red'onClick={() => deleteOccasion(occasion.id)} >
               Delete
             </Button>
-          </Card.Content>
-        </Card>
+            <Counter />
+          </div>
+        </div>
         <div>
         </div>
       </div>
     ));
   };
+  
 
   return (
     <div>
@@ -73,5 +71,45 @@ const Occasions = (props) => {
     </div>
   );
 };
+
+
+
+const HeaderText = styled.h1`
+  color: black !important;
+  text-align: center;  
+  padding-top: 3%;
+  font-family: arvo;
+  font-size: 2em;
+  text-shadow: 2px 2px #dce0e0;
+  `;
+
+const BodyText = styled.p `
+color: black;
+text-align: center;
+font-family: lato;
+font-size: 1em;
+`;
+
+
+const styles = {
+  container: {
+    border: `3px solid`,
+     width: "300px",
+     height: "300px"
+  },
+  statsContainer: {
+    display: "flex",
+    justifyContent: "space-around",
+  },
+  button: {
+  display: 'flex',
+  padding: '0',
+  margin: '0',
+  justifyContent: "space-around",
+    
+  },
+  statContainer: {},
+};
+
 
 export default Occasions;

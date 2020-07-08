@@ -1,13 +1,14 @@
 import React from "react";
 import { Header } from "semantic-ui-react";
 import Occasions from "./Occasions";
-import OccasionForm from './OccasionForm'
+import styled from 'styled-components'
+
 
 const Home = () => {
     
     return (
         <div>
-        <Header as="h1">Events In Your Area!</Header>
+        <HeaderText>Events In Your Area!</HeaderText>
         <hr />
         <br />
         <br/>
@@ -18,3 +19,12 @@ const Home = () => {
   );
 };
 export default Home;
+
+const HeaderText = styled.h1`
+  color: blue !important;
+  text-align: center;  
+  padding-top: 5%;
+  font-family: arvo;
+  font-size: 5em;
+  text-shadow: 2px 2px #dce0e0;
+  `;
