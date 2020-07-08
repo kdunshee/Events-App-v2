@@ -10,6 +10,7 @@ import FetchUser from './components/FetchUser';
 import Create from './components/Create'
 import ProtectedRoute from './components/ProtectedRoute'
 
+
 const App = () => (
   <Fragment>
     <Navbar />

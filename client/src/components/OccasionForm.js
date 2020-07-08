@@ -5,19 +5,31 @@ import Axios from 'axios';
 class OccasionForm extends React.Component {
   defaultValues = { name: "", description: "", time: "", additional_info: "" };
   state = { ...this.defaultValues, };
+
+
+
   handleSubmit = (e) => {
     e.preventDefault();
     const occasion = { ...this.state, };
-    Axios.post('api/occasions', {occasion: occasion}).then((res) => {
-        console.log(res)
-        this.props.add(res.data)
+    if (this.props.createOccasion){
+      this.props.createOccasion(occasion)
+    }
+    else  
+      Axios.post('api/occasions', {occasion: occasion}).then((res) => {
+          console.log(res)
+          this.props.add(res.data)
     })
     this.setState({ ...this.defaultValues, });
   }
+
+
+
   handleChange = (e) => {
     const { target: { name, value, } } = e;
     this.setState({ [name]: value, });
   }
+
+
   render() {
     const { name, description, date, additional_info } = this.state;
     return (

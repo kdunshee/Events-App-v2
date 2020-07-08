@@ -1,8 +1,23 @@
 import React from 'react';
-import { Header, } from "semantic-ui-react";
+import OccasionForm from './OccasionForm'
+import axios from 'axios'
 
-const Create = () => (
-  <Header as="h1">Create</Header>
+const Create = () => {
+
+  function createOccasion  (occasion) {
+    axios.post("api/occasions",{occasion: occasion})
+  .then(
+  window.location.href = ("/")
+  )
+  }
+
+
+  
+return (
+  <div>
+
+    <OccasionForm  createOccasion = {createOccasion}/>
+  </div>
 )
-
+}
 export default Create;

@@ -54,9 +54,12 @@ class Navbar extends React.Component {
             <Menu.Item
               name='create'
               id='create'
+            
             />
           </Link>
+            { this.rightNavItems() }
         </Menu>
+        
       </div>
     )
   }

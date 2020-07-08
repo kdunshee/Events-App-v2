@@ -45,7 +45,14 @@ const Occasions = (props) => {
           <Card.Content extra>
             <Counter />
             <Button color= "ui inverted primary button"as={Link} to={`/occasions/${occasion.id}`}>
-              View
+              <Link
+
+              Link to={`/OccasionView/`}
+          key={props.id}
+          {...props}>
+        <button>View</button>
+        </Link>
+
             </Button>
             <Button color="ui inverted red button" onClick={() => deleteOccasion(occasion.id)} >
               Delete
@@ -63,7 +70,6 @@ const Occasions = (props) => {
       <Card.Group>{renderOccasions()}</Card.Group>
       <br/>
       <br/>
-      <OccasionForm add = {addOccasion}/>
     </div>
   );
 };
