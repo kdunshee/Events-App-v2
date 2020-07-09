@@ -1,80 +1,84 @@
-import React from 'react';
-import { Form, Header, } from "semantic-ui-react";
-import Axios from 'axios';
-
-class OccasionForm extends React.Component {
-  defaultValues = { name: "", description: "", time: "", additional_info: "" };
-  state = { ...this.defaultValues, };
 
 
+import React, { useState, useEffect } from "react"
+import { Form, Button } from "semantic-ui-react"
+import axios from "axios"
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const occasion = { ...this.state, };
-    if (this.props.createOccasion){
-      this.props.createOccasion(occasion)
+const OccasionForm = (props) => {
+  const [name, setName] = useState('')
+  const [des, setDes] = useState('')
+  const [time, setTime] = useState('')
+  const [additional_info, setAddInfo] = useState('')
+
+  const occasion = { name: name, description: des, time: time, additional_info: additional_info}
+  
+  useEffect(() => {
+    if (props.id) {
+      setName(props.name)
+      setDes(props.description)
+      setTime(props.time)
+      setAddInfo(props.additional_info)
     }
-    else  
-      Axios.post('api/occasions', {occasion: occasion}).then((res) => {
-          console.log(res)
-          this.props.add(res.data)
-    })
-    this.setState({ ...this.defaultValues, });
+  },[])
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    if (props.editBoard) {
+      props.editBoard(props.id, occasion)
+      props.toggleEdit()
+    } else {  
+       axios.post("/api/occasions", occasion)
+      .then((res) => {
+        props.addOccasion(res.data)
+         props.toggleForm();
+      })
+      .catch((e) => {
+        console.log(e)
+      })
+      setName('')
+      setDes('')
+      setTime('')
+      setAddInfo('')
+      
+    }
   }
 
+  return (
+    <Form onSubmit={handleSubmit}>
+        <Form.Input
+          label="Name"
+          name="name"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+      />
 
-
-  handleChange = (e) => {
-    const { target: { name, value, } } = e;
-    this.setState({ [name]: value, });
-  }
-
-
-  render() {
-    const { name, description, date, additional_info } = this.state;
-    return (
-      <div>
-       
-
-        <Header as="h1">Enter New Event</Header>
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Group widths="equal">
-            <Form.Input
-              label="Name"
-              name="name"
-              placeholder="Name"
-              value={name}
-              onChange={this.handleChange}
-              required
-              />
-            <Form.Input
-              label="Description"
-              name="description"
-              placeholder="Description"
-              value={description}
-              onChange={this.handleChange}
-              />
-              <Form.Input
+      <Form.Input
+          label="Description"
+          name="description"
+          placeholder="Description"
+          value={des}
+          onChange={(e) => setDes(e.target.value)}
+          required
+      />
+       <Form.Input
               label="Time"
               name="time"
               placeholder="Time"
-              value={date}
-              onChange={this.handleChange}
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
               />
               <Form.Input
               label="Additional Information"
               name="additional_info"
               placeholder="Additional Information"
               value={additional_info}
-              onChange={this.handleChange}
+              onChange={(e) => setAddInfo(e.target.value)}
               />
-          </Form.Group>
-          <Form.Button color="blue">Submit</Form.Button>
-        </Form>
-              
-      </div>
-    )
-  }
+      <Button>Create</Button>
+      </Form>
+  )  
 }
 
 export default OccasionForm;
