@@ -14,15 +14,15 @@ const Occasion = (props) => {
     <div>
       <div style={styles.container}>
       <HeaderText style={styles.statHeader}>{props.name}</HeaderText>
-      <BodyText style={styles.statValue}>{props.description}></BodyText>
-      <BodyText style={styles.statValue}>{props.time}</BodyText>
-      <BodyText style={styles.statValue}>{props.additional_info}</BodyText>
+      <BodyText style={styles.statValue}>Description: {props.description}</BodyText>
+      <BodyText style={styles.statValue}>Time: {props.time}</BodyText>
+      <BodyText style={styles.statValue}>Additional Information: {props.additional_info}</BodyText>
       
       <br/>
       
       <div style={styles.button}>
       <Button color = 'blue' onClick={() => setEditing(!editing)}>{editing ? "Close Edit" : "Edit"}</Button>
-      <Button onClick={() => props.removeOccasion(props.id)}>Delete</Button> 
+      <Button color = 'red' onClick={() => props.removeOccasion(props.id)}>Delete</Button> 
       <Link to={`/OccasionView/${props.id}`}
           key={props.id}
           {...props}>

@@ -9,6 +9,7 @@ import { Container, } from "semantic-ui-react";
 import FetchUser from './components/FetchUser';
 import Create from './components/Create'
 import ProtectedRoute from './components/ProtectedRoute'
+import OccasionView from './components/OccasionView';
 
 
 const App = () => (
@@ -21,6 +22,7 @@ const App = () => (
         <ProtectedRoute exact path = "/create" component = {Create} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
+        <Route exact path="/OccasionView/:id" component={OccasionView} />
         <Route component={NoMatch} />
       </Switch>
     </Container>

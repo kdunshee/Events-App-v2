@@ -1,5 +1,4 @@
 
-
 import React, { useState, useEffect } from "react"
 import { Form, Button } from "semantic-ui-react"
 import axios from "axios"
@@ -26,22 +25,19 @@ const OccasionForm = (props) => {
     if (props.editBoard) {
       props.editBoard(props.id, occasion)
       props.toggleEdit()
-    } else {  
-       axios.post("/api/occasions", occasion)
-      .then((res) => {
-        props.addOccasion(res.data)
-         props.toggleForm();
-      })
-      .catch((e) => {
-        console.log(e)
-      })
+    } else if (props.createOccasion){  
+     props.createOccasion(occasion)
+      } else {
+       props.addOccasion(occasion)
+      }
+      
       setName('')
       setDes('')
       setTime('')
       setAddInfo('')
       
     }
-  }
+  
 
   return (
     <Form onSubmit={handleSubmit}>
